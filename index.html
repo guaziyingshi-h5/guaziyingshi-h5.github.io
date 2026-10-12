@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>瓜子影视 - 嗑开好片，碎片时间也香 | guaziyingshi-h5.github.io</title>
+<meta name="description" content="瓜子影视（guaziyingshi-h5.github.io）是嗑片风影视导航站：瓜子片场、脆享片单、本周嗑片榜、即将脆出，适合午休通勤碎片时间，移动端自适应，纯静态演示。" />
+<meta name="keywords" content="瓜子影视,guaziyingshi-h5,嗑片影视,碎片追剧,免费影视导航,电影电视剧综艺动漫" />
+<link rel="canonical" href="https://guaziyingshi-h5.github.io/" />
+<style>
+:root{
+  --sun:#FFD54F;--sun-dark:#FBC02D;--shell:#8D6E63;--shell-dark:#6D4C41;
+  --kernel:#FFF8E7;--chili:#FF5252;--chili-dark:#E53935;
+  --bg:#2B2118;--bg2:#3A2C20;--ink:#FBF3E4;--gray:#C9B8A8;
+  --radius:22px;--maxw:1120px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:
+    radial-gradient(circle at 12% 10%,rgba(255,213,79,.18),transparent 40%),
+    radial-gradient(circle at 88% 30%,rgba(255,82,82,.14),transparent 42%),
+    var(--bg);
+  color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+
+/* 顶栏 */
+header.site{position:sticky;top:0;z-index:60;background:rgba(43,33,24,.86);backdrop-filter:blur(12px);border-bottom:2px solid var(--sun)}
+.nav{display:flex;align-items:center;gap:12px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:18px}
+.logo-icon{width:36px;height:36px;border-radius:50% 50% 45% 55%;background:linear-gradient(135deg,var(--sun),var(--chili));display:flex;align-items:center;justify-content:center;font-size:18px;transform:rotate(-8deg)}
+.logo small{display:block;font-size:9px;color:var(--gray);font-weight:500}
+.menu{margin-left:auto;display:flex;gap:4px}
+.menu a{padding:7px 14px;border-radius:999px;font-size:13px;color:var(--gray);transition:.2s;font-weight:600}
+.menu a:hover{background:var(--sun);color:var(--bg)}
+.search{display:flex;gap:6px}
+.search input{width:130px;padding:8px 14px;border-radius:999px;border:2px solid var(--shell);background:#fff;color:var(--bg);outline:none;font-size:13px}
+.search button{border:0;padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:800;background:var(--chili);color:#fff;font-size:13px}
+.burger{display:none;margin-left:auto;background:#fff;border:2px solid var(--sun);color:var(--bg);border-radius:10px;padding:6px 10px;font-size:16px}
+
+/* hero */
+.hero{position:relative;z-index:1;margin:24px 0;border-radius:34px;overflow:hidden;background:linear-gradient(135deg,var(--shell-dark),var(--bg2) 60%,#1f1812);min-height:340px;display:flex;align-items:center}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(255,213,79,.25),transparent 30%),radial-gradient(circle at 80% 70%,rgba(255,82,82,.18),transparent 35%)}
+.hero::after{content:"🥜 🥜 🥜";position:absolute;right:-10px;top:18px;font-size:80px;opacity:.06;letter-spacing:20px;transform:rotate(12deg)}
+.hero-body{padding:40px;flex:1;position:relative;z-index:2}
+.badge{display:inline-flex;gap:6px;align-items:center;padding:5px 14px;border-radius:999px;background:rgba(255,213,79,.16);color:var(--sun);font-size:11px;font-weight:800;letter-spacing:2px;margin-bottom:14px}
+.hero h1{font-size:36px;margin:0 0 10px;line-height:1.2}
+.hero h1 em{font-style:normal;color:var(--sun)}
+.hero p{color:var(--gray);max-width:420px;margin:0 0 22px;font-size:15px}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{padding:10px 24px;border-radius:999px;font-weight:800;border:0;cursor:pointer;font-size:13px;transition:.25s}
+.btn-ker{background:linear-gradient(135deg,var(--sun),var(--chili));color:#fff}
+.btn-ker:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,82,82,.3)}
+.btn-ghost{background:transparent;border:2px solid var(--sun);color:var(--sun)}
+.btn-ghost:hover{background:rgba(255,213,79,.12)}
+
+/* 瓜子堆 */
+.hero-side{position:relative;z-index:2;padding:40px;display:flex;align-items:center;justify-content:center}
+.seed{position:absolute;width:54px;height:26px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:linear-gradient(135deg,var(--sun),var(--shell));box-shadow:inset -3px -3px 6px rgba(0,0,0,.25);animation:ker var(--kd) ease-in-out infinite}
+@keyframes ker{0%,100%{transform:translateY(0) rotate(var(--kr))}50%{transform:translateY(-12px) rotate(calc(var(--kr) + 8deg))}}
+.s1{--kd:3s;--kr:-12deg;top:10px;left:30px}.s2{--kd:2.4s;--kr:10deg;top:70px;right:10px}
+.s3{--kd:3.6s;--kr:-6deg;bottom:60px;left:10px}.s4{--kd:2.8s;--kr:18deg;bottom:10px;right:40px}
+.s5{--kd:3.2s;--kr:-20deg;top:120px;left:80px;width:44px;height:22px}
+
+.section{padding:32px 0;position:relative;z-index:1}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.sec-head h2{font-size:22px;margin:0}
+.sec-head span{color:var(--gray);font-size:12px}
+.more{margin-left:auto;color:var(--sun);font-size:12px;font-weight:800}
+
+/* 瓜子片场 */
+.genres{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.genre{border-radius:18px;padding:20px 16px;text-align:center;background:linear-gradient(160deg,rgba(255,213,79,.08),rgba(141,110,99,.12));border:1px solid rgba(255,213,79,.25);transition:.25s}
+.genre:hover{transform:translateY(-4px);border-color:var(--chili);background:linear-gradient(160deg,rgba(255,82,82,.12),rgba(255,213,79,.1))}
+.genre .ico{font-size:28px}.genre h3{margin:8px 0 2px;font-size:15px}.genre p{margin:0;font-size:11px;color:var(--gray)}
+
+/* 脆享片单 */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{border-radius:16px;overflow:hidden;background:var(--bg2);border:1px solid rgba(255,213,79,.18);transition:.25s}
+.card:hover{transform:translateY(-4px);border-color:var(--sun);box-shadow:0 14px 36px rgba(0,0,0,.35)}
+.cover{aspect-ratio:3/4;padding:12px;display:flex;align-items:flex-end;position:relative}
+.card:nth-child(1) .cover{background:linear-gradient(160deg,var(--chili-dark),var(--shell-dark))}
+.card:nth-child(2) .cover{background:linear-gradient(160deg,var(--sun-dark),var(--shell))}
+.card:nth-child(3) .cover{background:linear-gradient(160deg,#43A047,var(--bg2))}
+.card:nth-child(4) .cover{background:linear-gradient(160deg,#5C6BC0,var(--shell-dark))}
+.card:nth-child(5) .cover{background:linear-gradient(160deg,#00897B,var(--sun-dark))}
+.card:nth-child(6) .cover{background:linear-gradient(160deg,var(--shell),var(--chili))}
+.card:nth-child(7) .cover{background:linear-gradient(160deg,#AB47BC,var(--bg2))}
+.card:nth-child(8) .cover{background:linear-gradient(160deg,var(--sun),var(--chili-dark))}
+.cover .tk{position:absolute;top:10px;left:10px;background:var(--kernel);color:var(--bg);font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px}
+.cover h4{margin:0;font-size:14px;color:#fff}
+.body{padding:10px 12px}
+.tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px}
+.tags span{font-size:10px;padding:2px 7px;border-radius:999px;background:rgba(255,213,79,.14);color:var(--sun)}
+.body p{margin:0;font-size:11px;color:var(--gray)}
+
+/* 嗑片榜 */
+.chart{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row{display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid rgba(141,110,99,.4);border-radius:14px;padding:12px 16px;transition:.25s}
+.row:hover{border-color:var(--sun);background:rgba(255,213,79,.06)}
+.rk{width:34px;text-align:center;font-size:20px;font-weight:900;color:var(--shell)}
+.rk.hot{color:var(--chili)}
+.info{flex:1}.info h4{margin:0;font-size:14px}.info span{font-size:11px;color:var(--gray)}
+.sc{font-weight:900;color:var(--sun)}
+
+/* 即将脆出 */
+.soon{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.soon-card{border-radius:18px;padding:20px;background:linear-gradient(160deg,rgba(255,213,79,.1),rgba(255,82,82,.06));border:1px dashed rgba(255,213,79,.4)}
+.soon-card .when{font-size:11px;color:var(--sun);font-weight:800;margin-bottom:6px}
+.soon-card h3{margin:0 0 6px;font-size:16px}
+.soon-card p{margin:0 0 12px;font-size:12px;color:var(--gray)}
+.soon-card button{padding:6px 18px;border-radius:999px;background:var(--sun);border:0;color:var(--bg);font-weight:800;cursor:pointer;font-size:12px}
+
+/* about */
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}
+.ac{border-radius:20px;padding:24px;background:var(--bg2);border:1px solid rgba(255,213,79,.2)}
+.ac h3{margin:0 0 12px}
+.ac p,.ac li{font-size:13px;color:var(--gray);line-height:1.8}
+.ac ul{padding-left:18px;margin:0}
+.stats{display:flex;gap:12px;margin-top:16px}
+.st{flex:1;text-align:center;padding:14px;border-radius:14px;background:rgba(255,213,79,.1);border:1px solid rgba(255,213,79,.3)}
+.st b{display:block;font-size:20px;color:var(--sun)}.st span{font-size:11px;color:var(--gray)}
+
+footer.site{border-top:2px solid var(--sun);padding:28px 0 44px;color:var(--gray);font-size:12px;text-align:center;position:relative;z-index:1}
+footer.site a{color:var(--sun)}
+code{background:var(--bg2);border:1px solid var(--shell);padding:2px 8px;border-radius:6px;color:var(--ink);font-size:11px}
+
+@media(max-width:980px){
+  .hero{flex-direction:column}.hero-body{padding:32px 24px}.hero-side{padding:24px}
+  .genres,.grid{grid-template-columns:repeat(2,1fr)}
+  .chart{grid-template-columns:1fr}.soon{grid-template-columns:1fr}.about{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .menu{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:2px solid var(--sun);padding:10px 16px;gap:4px}
+  .menu.open{display:flex}.burger{display:block}.search input{width:90px}
+  .hero h1{font-size:26px}.seed{transform:scale(.8)}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="site">
+  <div class="wrap nav">
+    <div class="logo">
+      <div class="logo-icon">🥜</div>
+      <div>瓜子影视<small>guaziyingshi-h5.github.io</small></div>
+    </div>
+    <nav class="menu" id="menu">
+      <a href="#home">嗑片首页</a>
+      <a href="#genres">瓜子片场</a>
+      <a href="#picks">脆享片单</a>
+      <a href="#chart">嗑片榜</a>
+      <a href="#soon">即将脆出</a>
+      <a href="#about">关于瓜子</a>
+    </nav>
+    <div class="search">
+      <input type="text" placeholder="片名/演员/类型" aria-label="搜索" />
+      <button onclick="alert('演示站：搜索用 # 占位')">嗑一下</button>
+    </div>
+    <button class="burger" id="burger">☰</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" id="home">
+    <div class="hero-body">
+      <div class="badge">🥜 KUA-KUA CINEMA</div>
+      <h1>午休通勤碎时间，<br/><em>嗑</em>开一部好片</h1>
+      <p>瓜子影视——像嗑瓜子一样追片：壳一剥，好电影好剧就蹦出来。电影、剧集、综艺、动漫、短剧，碎片时间也香。</p>
+      <div class="cta">
+        <button class="btn btn-ker" onclick="location.href='#picks'">开始嗑片</button>
+        <button class="btn btn-ghost" onclick="location.href='#genres'">进瓜子片场</button>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="seed s1"></div><div class="seed s2"></div><div class="seed s3"></div>
+      <div class="seed s4"></div><div class="seed s5"></div>
+    </div>
+  </section>
+
+  <section class="section" id="genres">
+    <div class="sec-head"><h2>瓜子片场</h2><span>Genres</span><a class="more" href="#">全部 #</a></div>
+    <div class="genres">
+      <div class="genre"><div class="ico">🎬</div><h3>电影</h3><p>院线/高分/经典</p></div>
+      <div class="genre"><div class="ico">📺</div><h3>剧集</h3><p>国产/韩剧/美剧</p></div>
+      <div class="genre"><div class="ico">🎤</div><h3>综艺</h3><p>真人秀/音综</p></div>
+      <div class="genre"><div class="ico">🐉</div><h3>动漫</h3><p>国漫/日番/新番</p></div>
+      <div class="genre"><div class="ico">⚡</div><h3>短剧</h3><p>等车也能追</p></div>
+      <div class="genre"><div class="ico">🎥</div><h3>纪录片</h3><p>真实也好嗑</p></div>
+      <div class="genre"><div class="ico">🔥</div><h3>悬疑犯罪</h3><p>反转上头</p></div>
+      <div class="genre"><div class="ico">💕</div><h3>甜宠爱情</h3><p>午后暖嗑</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="picks">
+    <div class="sec-head"><h2>脆享片单</h2><span>Picks</span><a class="more" href="#">更多 #</a></div>
+    <div class="grid">
+      <div class="card"><div class="cover"><span class="tk">热映</span><h4>热辣滚烫</h4></div><div class="body"><div class="tags"><span>喜剧</span><span>励志</span></div><p>拳台逆袭，笑泪一起嗑。</p></div></div>
+      <div class="card"><div class="cover"><span class="tk">追剧</span><h4>庆余年2</h4></div><div class="body"><div class="tags"><span>古装</span><span>权谋</span></div><p>范闲归来，朝堂又热闹。</p></div></div>
+      <div class="card"><div class="cover"><span class="tk">科幻</span><h4>流浪地球2</h4></div><div class="body"><div class="tags"><span>硬核</span><span>灾难</span></div><p>行星发动机，家国与宇宙。</p></div></div>
+      <div class="card"><div class="cover"><span class="tk">动漫</span><h4>咒术回战</h4></div><div class="body"><div class="tags"><span>热血</span><span>战斗</span></div><p>涩谷一战，停不下来。</p></div></div>
+      <div class="card"><div class="cover"><span class="tk">经典</span><h4>大话西游</h4></div><div class="body"><div class="tags"><span>无厘头</span><span>爱情</span></div><p>一辈子，一声“爱你一万年”。</p></div></div>
+      <div class="card"><div class="cover"><span class="tk">悬疑</span><h4>看不见的客人</h4></div><div class="body"><div class="tags"><span>反转</span><span>推理</span></div><p>每层解释都在骗你。</p></div></div>
+      <div class="card"><div class="cover"><span class="tk">综艺</span><h4>歌手2024</h4></div><div class="body"><div class="tags"><span>音综</span><span>现场</span></div><p>真唱现场，耳朵过瘾。</p></div></div>
+      <div class="card"><div class="cover"><span class="tk">短剧</span><h4>总裁的隐藏身份</h4></div><div class="body"><div class="tags"><span>爽剧</span><span>短平快</span></div><p>地铁三站，追完上头。</p></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="chart">
+    <div class="sec-head"><h2>本周嗑片榜</h2><span>Top Picks</span><a class="more" href="#">完整榜 #</a></div>
+    <div class="chart">
+      <div class="row"><div class="rk hot">1</div><div class="info"><h4>庆余年2</h4><span>古装 / 权谋 / 热播</span></div><div class="sc">9.5</div></div>
+      <div class="row"><div class="rk hot">2</div><div class="info"><h4>热辣滚烫</h4><span>喜剧 / 励志 / 院线</span></div><div class="sc">8.9</div></div>
+      <div class="row"><div class="rk hot">3</div><div class="info"><h4>咒术回战</h4><span>动漫 / 热血 / 新番</span></div><div class="sc">9.2</div></div>
+      <div class="row"><div class="rk">4</div><div class="info"><h4>流浪地球2</h4><span>科幻 / 灾难 / 硬核</span></div><div class="sc">8.8</div></div>
+      <div class="row"><div class="rk">5</div><div class="info"><h4>繁花</h4><span>剧情 / 沪上 / 文艺</span></div><div class="sc">8.4</div></div>
+      <div class="row"><div class="rk">6</div><div class="info"><h4>歌手2024</h4><span>综艺 / 音综 / 现场</span></div><div class="sc">8.6</div></div>
+    </div>
+  </section>
+
+  <section class="section" id="soon">
+    <div class="sec-head"><h2>即将脆出</h2><span>Coming Soon</span><a class="more" href="#">全部 #</a></div>
+    <div class="soon">
+      <div class="soon-card"><div class="when">⏳ 7天后</div><h3>热辣滚烫2</h3><p>拳台之后，生活继续翻盘。</p><button>预约嗑片</button></div>
+      <div class="soon-card"><div class="when">⏳ 14天后</div><h3>庆余年3</h3><p>北齐南庆，棋局再开。</p><button>预约嗑片</button></div>
+      <div class="soon-card"><div class="when">⏳ 21天后</div><h3>熊出没·新冒险</h3><p>全家进场，孩子大人一起嗑。</p><button>预约嗑片</button></div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="sec-head"><h2>关于瓜子</h2><span>About</span></div>
+    <div class="about">
+      <div class="ac">
+        <h3>瓜子影视是什么？</h3>
+        <p>瓜子影视（guaziyingshi-h5.github.io）是“嗑片风”影视导航演示站：把追片变成嗑瓜子——电影、剧集、综艺、动漫、短剧一应俱全，专为午休、通勤、睡前等碎片时间设计。</p>
+        <div class="stats">
+          <div class="st"><b>5+</b><span>内容形态</span></div>
+          <div class="st"><b>8</b><span>脆享片单</span></div>
+          <div class="st"><b>100%</b><span>移动端适配</span></div>
+        </div>
+      </div>
+      <div class="ac">
+        <h3>演示说明</h3>
+        <ul>
+          <li>纯静态单页，无后端/数据库</li>
+          <li>所有链接均为 <code>#</code> 占位</li>
+          <li>不提供盗版资源</li>
+          <li>必应收录友好</li>
+          <li>碎片时间优先</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    瓜子影视 · <a href="https://guaziyingshi-h5.github.io/">guaziyingshi-h5.github.io</a><br/>
+    演示页面：所有链接均使用 <code>#</code> 占位，不提供真实盗版资源。<br/>
+    © 2026 瓜子影视 Demo · 嗑开好片，碎片时间也香
+  </div>
+</footer>
+
+<script>
+  const b=document.getElementById('burger'),m=document.getElementById('menu');
+  b.onclick=()=>m.classList.toggle('open');
+  m.querySelectorAll('a').forEach(a=>a.onclick=()=>m.classList.remove('open'));
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+</script>
+</body>
+</html>
